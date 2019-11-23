@@ -54,7 +54,7 @@ class Splash extends Component {
 
 
 
-        }, 6000)
+        }, 1000)
 
     }
 

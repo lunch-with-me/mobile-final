@@ -168,8 +168,6 @@ class ProfileSettings extends Component {
     
        </View> 
        
-       <Text>Date of Birth:</Text>
-       <Text>{this.state.user.date_of_birth}</Text>
        <View style={{flexDirection:'row'}}> 
        <View>
 
@@ -180,7 +178,7 @@ class ProfileSettings extends Component {
        
        
 
-       <Text>Gender:</Text>
+       <Text style={{fontWeight:'bold'}}>Gender:</Text>
       <View style={{flexDirection:'row'}}> 
        <View> 
       <Text>{this.state.user.gender}</Text>
@@ -189,7 +187,7 @@ class ProfileSettings extends Component {
        </View> 
       
        
-       <Text>Email:</Text> 
+       <Text style={{fontWeight:'bold'}}>Email:</Text> 
       <View style={{flexDirection:'row'}}> 
        <View> 
       <Text>
@@ -202,7 +200,7 @@ class ProfileSettings extends Component {
        </View>
    
 
-      <Text>profession:</Text> 
+      <Text style={{fontWeight:'bold'}}>profession:</Text> 
       <View style={{flexDirection:'row'}}> 
        <View> 
       <Text>

@@ -123,7 +123,7 @@ class Profiles extends Component {
                                     <View style={styles.bottomContainer}>
                                         <View style={styles.row}>
                                             <View style={styles.leftContainer}>
-                                                <Text style={[styles.text, {fontSize: EStyleSheet.value('15rem')}]}>{item.username}</Text>
+                                                <Text style={[styles.text, {fontSize: EStyleSheet.value('15rem'),fontWeight:'bold'}]}>{item.username}</Text>
                                             </View>
                                             <View style={styles.rightContainer}>
                                                 <TouchableOpacity style={styles.btn} onPress={() => this.superlike()}>

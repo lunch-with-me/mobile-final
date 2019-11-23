@@ -5,7 +5,9 @@ import {
     Text,
     Button,
     TouchableOpacity,
-    Alert
+    ImageBackground,
+    Alert,
+    Image,
 } from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import DateTimePicker from '@react-native-community/datetimepicker';
@@ -15,7 +17,9 @@ import {
     MAPTIME
 }from '../../api/API';
 import * as actions from '../../redux/actions';
-
+import backgound from '../../assests/Images/back.jpg';
+import clock4 from '../../assests/Images/clock4.png';
+import Icon from 'react-native-vector-icons/FontAwesome';
 const entireScreenWidth = Dimensions.get('window').width;
 EStyleSheet.build({ $rem: entireScreenWidth / 380 });
 
@@ -104,20 +108,32 @@ class TimePickerScreen extends Component {
 
         return (
             <View style={styles.mainContainer}>
+                <ImageBackground source={backgound} style={{ width: '100%', height: '100%' }}>
+                    <View style={styles.mainContainerColor}>
                 <View style={styles.buttonContainer}>
                     <View style={styles.item}>
+                   
+                        <View style={styles.mainContainerColor2}>
+                        <Text style={styles.btnText}>Select Start Time</Text>
                         <Text style={styles.time}>{moment(startDate).format('LTS')}</Text>
                         {/* <Text>{startDate.toISOString()}</Text> */}
                         <TouchableOpacity style={styles.btn} onPress={this.startTimepicker}>
-                            <Text style={styles.btnText}>Select Start Time</Text>
+                        <View ><Image source={clock4}/></View>
                         </TouchableOpacity>
+                        </View>
+                       
                     </View>
                     <View style={styles.item}>
+                    
+                    <View style={styles.mainContainerColor2}>
+                    <Text style={styles.btnText}>Select end Time</Text>
                         <Text style={styles.time}>{moment(endDate).format('LTS')}</Text>
                         {/* <Text>{endDate.toISOString()}</Text> */}
                         <TouchableOpacity style={styles.btn} onPress={this.endTimepicker}>
-                            <Text style={styles.btnText}>Select End Time</Text>
+                        <View ><Image source={clock4}/></View>
                         </TouchableOpacity>
+                        </View>
+                      
                     </View>
                 </View>
                 {startShow && <DateTimePicker
@@ -137,9 +153,10 @@ class TimePickerScreen extends Component {
                 />
                 }
 
-                  <Text>Your next step is to select the place you want to dine</Text>
-                <TouchableOpacity style={[styles.btn, {width: 100, marginVertical: 15}]} onPress={() => this.sendTime()}><Text>Next</Text></TouchableOpacity>
-              
+                  <Text style={{marginLeft:20}}>To select the place from where you wish to get dining partners</Text>
+                <TouchableOpacity style={[styles.btn, {width: 150,height:60, marginVertical: 15,marginRight:15,alignSelf:'flex-end'}]} onPress={() => this.sendTime()}><Text style={{color:'#fff',fontWeight:'bold'}}>Next</Text></TouchableOpacity>
+                </View>
+                </ImageBackground>
             </View>
         );
     }
@@ -155,33 +172,59 @@ const styles = EStyleSheet.create({
         flex: 1,
         height: '200rem',
         width: entireScreenWidth,
-        flexDirection: 'row',
+        flexDirection: 'column',
         justifyContent: 'space-around',
-        alignItems: 'center'
+        alignItems: 'center',
+        marginTop:'10%'
     },
     item: {
         alignItems: 'center',
-        justifyContent: 'space-around'
+        justifyContent: 'space-around',
+        backgroundColor:'#ffffff',
+        width:'200rem',
+        height:'200rem',
+        borderRadius:10,
+        elevation:10
+
+    },
+    mainContainerColor:{
+        flex:1,
+        backgroundColor: "rgba(255,255,255,0.7)",
+        width:'100%',
+        height:'100%',
+    },
+    mainContainerColor2:{
+        flex:1,
+        backgroundColor: "rgba(255,255,255,0.9)",
+        width:'100%',
+        height:'100%',
     },
     btn: {
         backgroundColor: '#c97b63',
-        width: 'auto',
-        height: '40rem',
+        width: '60rem',
+        height: '60rem',
         borderRadius: '15rem',
         elevation: 3,
         textAlign: "center",
         marginTop: '10rem',
         justifyContent: 'center',
         alignItems: 'center',
-        paddingHorizontal: '8rem'
+        paddingHorizontal: '8rem',
+        alignSelf:"center",
+        marginTop:50
     },
     btnText: { 
-        color: 'white', 
-        fontSize: 15 
+        color: '#c97b63', 
+        fontSize: 20,
+        alignSelf:'center',
+        marginTop:10
+
     },
     time: {
         fontSize: '18rem',
-        color: '#222'
+        color: '#000',
+        alignSelf:"center",
+        marginTop:10
     }
 });
 

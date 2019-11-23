@@ -9,5 +9,11 @@ export const BottomTabNavigator = createBottomTabNavigator(
         Profiles: Profiles,
         Likes: Likes,
         
+    },
+    {
+        tabBarOptions: {
+            activeTintColor: 'tomato',
+            inactiveTintColor: '#2b2d2f',
+          },
     }
 );

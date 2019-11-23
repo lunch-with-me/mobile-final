@@ -11,7 +11,6 @@ export const DrawerNavigator = createDrawerNavigator(
         visitedProfile: ProfileSettings,
         MyProfile:myprofile,
         
-        
     },
     {
         drawerBackgroundColor: 'rgba(255,255,255,.9)',

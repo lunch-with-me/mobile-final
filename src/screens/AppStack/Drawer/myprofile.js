@@ -14,13 +14,12 @@ import {
 
 import EStyleSheet from 'react-native-extended-stylesheet';
 import DatePicker from 'react-native-datepicker';
-import { connect } from 'react-redux';
 import moment from 'moment';
 //import RadioForm from 'react-native-simple-radio-button';
 
 
 import {
-MYPROFILE
+MYPROFILE2
 } from '../../../api/API';
 import profile1 from '../../../assests/Images/profiles1.jpg';
 import unlock2 from '../../../assests/Images/unlock2.png';
@@ -29,7 +28,7 @@ import pencil from '../../../assests/Images/pencil.png';
 const entireScreenWidth = Dimensions.get('window').width;
 EStyleSheet.build({ $rem: entireScreenWidth / 380 });
 
-class myprofile extends Component {
+class ProfileSettings extends Component {
 
     constructor(props) {
         super(props);
@@ -62,10 +61,10 @@ class myprofile extends Component {
 
     APICall(userId) {
       const {fullName}=this.state;
-      // console.log(userId);
-      // console.log("apicall");
+      console.log(userId);
+      console.log("apicall");
       
-       fetch(`${MYPROFILE}/${userId}`, {
+       fetch(`${MYPROFILE2}/${userId}`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -94,17 +93,15 @@ class myprofile extends Component {
     
   }
     componentDidMount(){
-      const { selectedUser } = this.props;
-      if(Object.keys(selectedUser).length === 0 && selectedUser.constructor === Object) {
-          AsyncStorage.getItem('accessToken').then(accessToken => {
-            AsyncStorage.getItem('userId').then(userId => {
-                this.APICall(userId);
-            });
+
+      AsyncStorage.getItem('accessToken').then(accessToken => {
+        AsyncStorage.getItem('userId').then(userId => {
+           // this.props.getLikesList(accessToken, userId);
+            //getLikesList is defined in AuthAction
+            //alert(userId);
+  this.APICall(userId);
         });
-      } else {
-        this.setState({user: selectedUser});
-      }
-      
+    });
       
 /* AsyncStorage.getItem('userId').then(userId => {
   //this.props.getLikesList(accessToken, userId);
@@ -118,7 +115,7 @@ class myprofile extends Component {
 
     render() {
       //this.state.user.date_of_birth.toString().slice(0,10)
-      //const dob=JSON.stringify(this.state.user.date_of_birth)
+     // const dob=JSON.stringify(this.state.user.date_of_birth)
         //const  doadb devicesb2=dob.slice(2,5);
         return (
             <View style={styles.MainContainer}>
@@ -151,60 +148,86 @@ class myprofile extends Component {
             <View style={styles.body}>
    
    <View style={styles.cardP}>
-  
-     <Text styles={styles.bio}>Personal Details</Text>
+   <View style={{margin:20}}>
+     <Text styles={{fontWeight:'bold',fontSize:30,marginLeft:15}}>Personal Details</Text>
+     </View>
+     
      <View>
-       <Text>fullName:</Text>
+
+
+     <View style={{margin:20}}>
+       <Text style={{fontWeight:'bold',fontSize:18}}>Full  Name:</Text>
        <View style={{flexDirection:'row'}}> 
        <View>
-       <Text>
+       <Text style={{fontSize:15,marginTop:15}}>
           {this.state.user.fullname}
          {/*  //editable={this.state.EditFullName}
           //onChangeText={text => this.onFullnameChanged(text)}
           //onChangeText={(fullName)=>this.setState({fullName})} */}
 
           </Text>
+          </View>
        </View>
     
        </View> 
-       
+       <View style={{margin:20}}>
+      <Text style={{fontWeight:'bold',fontSize:18}}>Bio:</Text> 
+      
+      <Text style={{fontSize:15,marginTop:15}}>
+         {this.state.user.message}
+        {/*  //editable={this.state.EditEmail}
+        //onChangeText={(Email)=>this.setState({Email})} */}
+        </Text>
+     
+        </View>
+
+       <View style={{margin:15}}>
+      <Text style={{fontWeight:'bold',fontSize:18}}>Gender:</Text> 
+      
+      <Text style={{fontSize:15,marginTop:15}}>
+         {this.state.user.gender}
+        {/*  //editable={this.state.EditEmail}
+        //onChangeText={(Email)=>this.setState({Email})} */}
+        </Text>
+     
+        </View>
        
        
 
-       <Text>Gender:</Text>
-      <View style={{flexDirection:'row'}}> 
-       <View> 
-      <Text>{this.state.user.gender}</Text>
-      </View>
       
-       </View> 
-      
-       
-       <Text>Email:</Text> 
-      <View style={{flexDirection:'row'}}> 
-       <View> 
-      <Text>
+     
+       <View style={{margin:15}}>
+       <Text style={{fontWeight:'bold', fontSize:18}}>Email:</Text> 
+     
+      <Text style={{fontSize:15,marginTop:15}}>
          {this.state.user.email}
         {/*  //editable={this.state.EditEmail}
         //onChangeText={(Email)=>this.setState({Email})} */}
         </Text>
-      </View>
+     
+        </View>
+        <View style={{margin:15}}>
+      <Text style={{fontWeight:'bold',fontSize:18}}>profession:</Text> 
       
-       </View>
-   
-
-      <Text>profession:</Text> 
-      <View style={{flexDirection:'row'}}> 
-       <View> 
-      <Text>
+      <Text style={{fontSize:15,marginTop:15}}>
          {this.state.user.myProf}
         {/*  //editable={this.state.EditEmail}
         //onChangeText={(Email)=>this.setState({Email})} */}
         </Text>
-      </View>
+     
+        </View>
+
+        <View style={{margin:15}}>
+      <Text style={{fontWeight:'bold',fontSize:18}}>Interested Profession:</Text> 
       
-       </View>
-   
+      <Text style={{fontSize:15,marginTop:15}}>
+         {this.state.user.intProf}
+        {/*  //editable={this.state.EditEmail}
+        //onChangeText={(Email)=>this.setState({Email})} */}
+        </Text>
+     
+        </View>
+       
        
         
        
@@ -277,7 +300,7 @@ const styles = EStyleSheet.create({
       },
       bio:{
           fontSize:15,
-          fontWeight:'700',
+          fontWeight:'bold',
       },
       heading:{
         alignItems:'center',
@@ -357,10 +380,4 @@ const styles = EStyleSheet.create({
       },
 });
 
-const mapStateToProps = state => {
-  return {
-    selectedUser: state.app.selectedUser,
-  };
-};
-
-export default connect(mapStateToProps, null)(myprofile);
+export default ProfileSettings;

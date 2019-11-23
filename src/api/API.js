@@ -1,5 +1,5 @@
 export const PROTOCOL = 'http://';
-export const HOST = '192.168.8.100:8080';
+export const HOST = '192.168.8.103:8080';
 //API URL 
 export const BASEURL = `${PROTOCOL}${HOST}`;
 export const LOGIN = `${PROTOCOL}${HOST}/users/authenticate`;
@@ -13,3 +13,4 @@ export const MAPTIME = `${PROTOCOL}${HOST}/users/meet`;
 export const NEARBY_USERS = `${PROTOCOL}${HOST}/users/all`; 
 export const LIKE = `${PROTOCOL}${HOST}/users/request`; 
 export const ALL_USERS = `${PROTOCOL}${HOST}/users/allusers`;
+export const MYPROFILE2 = `${PROTOCOL}${HOST}/users/getSugestedProfileDetails`;
